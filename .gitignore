@@ -1,0 +1,25 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.log
+.vscode/
+.env
+.ruff_cache/
+
+# Data folder: third-party telescope data and images (redistribution rights
+# not confirmed) and files generated from them. Only .gitkeep is kept.
+Data/*
+!Data/.gitkeep
+*.fits
+*.fit
+*.fts
+*.fz
+
+# Generated output
+results/
+
+# Local backups and old files
+*_backup.py
+*_broken_backup.py
+*.bak
