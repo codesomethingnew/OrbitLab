@@ -143,14 +143,45 @@ python orbitlab_app.py
 
 Some activities need data files that are **not included** in this repository.
 
-Place them in these places:
+The `Data` folder sits next to `orbitlab_app.py`. It is empty after you download OrbitLab (it only holds a placeholder file). The files below must be placed in the exact folders shown, with the exact names shown.
 
-- `Data/horsehead/HorseHead.fits` (Explore: Horsehead image)
-- `Data/demo_sequence/ah-demo-1.fits` to `ah-demo-4.fits` (Explore: image sequence, Detect, Experiment: compare and filter)
+| Activity | Button | Files it needs |
+|---|---|---|
+| Explore | View an astronomical image | `Data/horsehead/HorseHead.fits` |
+| Explore | Explore an image sequence | `Data/demo_sequence/ah-demo-1.fits` to `ah-demo-4.fits` |
+| Detect | Find candidate changes | `Data/demo_sequence/ah-demo-1.fits` to `ah-demo-4.fits` |
+| Experiment | Compare two images | `Data/demo_sequence/ah-demo-1.fits` and `ah-demo-2.fits` |
+| Experiment | Filter image noise | `Data/demo_sequence/ah-demo-1.fits` and `ah-demo-2.fits` |
+| Experiment | Simulate movement | **None.** It makes its own artificial star field. |
 
-**Simulate movement needs no data files.**
+(The OrbitLab window asks for all four `ah-demo` files before it starts the sequence activities, and for the first two before it starts Compare and Filter.)
 
-If a file is missing, OrbitLab shows a message.
+### Using your own FITS images
+
+You can try your own images, but **not every FITS file will work**. These activities are simple demonstrations and only read the simplest kind of FITS file. A file is more likely to work if:
+
+- It is a FITS file (`.fits`) containing a single, ordinary **2D greyscale image**.
+- The image is stored in the **first part** of the file (called the primary HDU). Many FITS files keep their image in a later part; those will not work here.
+- For **Detect**: you have **at least 3 images** named `ah-demo-*.fits`, and **all have exactly the same width and height**.
+- For **Explore an image sequence**: you have **at least 3** `.fits` images in `Data/demo_sequence/`. This activity does not compare them, so their sizes may differ.
+- For Compare and Filter: the two images have **exactly the same width and height**.
+- The files are saved with the exact names and folders in the table above. OrbitLab does not search for files with other names; the window checks for the exact names listed.
+
+To try your own data:
+
+1. Close OrbitLab.
+2. Copy your FITS files into the folder from the table, and rename them to match.
+3. Start OrbitLab again and click the activity's button.
+4. If a plot window opens, it worked. If you see an error message, see below.
+
+Only use images you have the right to use. Do not upload other people's data to your own copy of this repository.
+
+### If something is wrong
+
+- **A file is missing:** OrbitLab shows a "Telescope data needed" message that lists the missing file paths. Nothing else happens. (If you run a script directly from the terminal instead, it prints a short "file not found" message.)
+- **The files are the wrong size:** Compare and Filter stop with the error "different dimensions". Detect also stops if its images are not all the same size.
+- **A file is not compatible or cannot be read** (for example, it is damaged, is not FITS, or has no image in the first part): the activity stops and OrbitLab shows an "Activity failed" message with the last few lines of the error. This is a limit of these simple demonstrations, not a sign that your file is bad.
+- **The activity runs but the picture looks odd:** the images may not suit the demonstration. Candidate changes are unverified in any case (see "A note about science").
 
 Where to get data:
 
